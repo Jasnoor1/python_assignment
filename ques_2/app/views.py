@@ -2,13 +2,15 @@ from django.shortcuts import render
 from .forms import ProfileForm
 
 
-def handleform(request):
+def display(request):
+    print('I am in view of handling the form')
     if request.method=='POST':
         form = ProfileForm(data=request.POST)
-        if request.POST.get('submit'):
-            if form.is_valid():
-                profile = form.save(commit=False)
-                profile.save()
+        print('%%%%%%%%%%%%%',form)
+        if form.is_valid():
+           print('I am in validation of form')
+           a = form.save()
+           print(a)
     else:
         form = ProfileForm()
-    return render(request, 'index.html', context=locals())
+    return render(request, 'index.html', {'form':form})

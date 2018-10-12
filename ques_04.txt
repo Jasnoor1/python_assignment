@@ -1,0 +1,23 @@
+question -
+I can define a field in a django form in the following 2 ways:	
+    class MyForm(forms.Form):
+        myfield = forms.ChoiceField(choices=[(u.id, u.username) for u in User.objects.filter(type="TYPE1")])
+
+    AND also as
+
+    class MyForm(forms.Form):
+        pass
+
+        def __init__(self, *args, **kwargs):
+            super(MyForm, self).__init__(*args, **kwargs)
+            self.fields['myfield'] = forms.ChoiceField(choices=[(u.id, u.username) for u in User.objects.filter(type="TYPE1")])
+
+What is the difference between the two approaches (if any)?
+
+Ans--
+
+In the first way, myfield is defined and fetches the choices at the time that the class is defined. This isn't ideal, because it means you
+have an SQL query to ftech the choices from the database when the application loads. 
+
+In the second way, the field and the choices are defined and they display the value when the form is instantiated. This means that the 
+choices will be up to date when you display the form. 

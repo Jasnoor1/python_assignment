@@ -1,14 +1,17 @@
+import redis
 
-from settings import r
-import sys
+config = {
+            'host': 'localhost',
+            'port': 6379,
+            'db': 0,
+        }
+
+r = redis.StrictRedis(**config)
 
 if __name__ == '__main__':
-    channel = sys.argv[0]
     pubsub = r.pubsub()
-    pubsub.subscribe(channel)
-
-    print ('Listening to {channel}'.format(**locals()))
+    pubsub.subscribe("get_rand_numbers")
     while True:
         for item in pubsub.listen():
-            print (item['data'])
+            print( "recvd {}".format(item['data']))
 

@@ -1,0 +1,21 @@
+Discuss . Multi-processing and Multi-threading in Python. What is GIL?
+
+GIL(Global Interpreter Lock)-
+It is a mutex(or a lock) that allows only one thread to hold the control of the Python interpreter. This means that only one thread can be in state of execution at any point in time.
+
+
+Multi-threading -
+
+The multithreading is a lightweight, shares memory, responsible for responsive UI and is used well for I/O bound applications.
+Multiple threads live in the same process in the same space, each thread will do a specific task, have its own code, own memory, 
+instruction pointer,and share heap memory.
+
+Threads run in the same unique memory heap.
+
+MultiProcessing -
+
+Multiprocessing refers to the ability of a system to support more than one processor at the same time. 
+In python, multiprocseeing uses seperate memory space, multiple CPU cores, bypasses GIL limitations in CPython.
+
+
+
